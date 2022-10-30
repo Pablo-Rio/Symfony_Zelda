@@ -1,43 +1,50 @@
 {% extends 'base.html.twig' %}
 
+
 {% block title %}The Legend Of Zelda: The Great Forum{% endblock %}
 
 {% block body %}
-<form method="post">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+    <style>
+        .container { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    </style>
+    <div class="container">
+    <form method="post">
 
-    {% if app.user %}
-        <div class="mb-3">
-            {#TODO: https://symfony.com/doc/current/templating/twig_extension.html #}
-            Vous êtes connecté en tant que {{ app.user.username }}, <a href="{{ path('app_logout') }}">Déconnexion</a>
-        </div>
-    {% endif %}
+        {% if app.user %}
+            <div class="mb-3">
+                Vous êtes connecté en tant que {{ app.user.getusername() }}, <a href="{{ path('app_logout') }}">Déconnexion</a>
+            </div>
+        {% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Se connecter</h1>
-    <label for="inputEmail">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-    <label for="inputPassword">Mot de passe</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+        <h1 class="h3 mb-3 font-weight-normal">Se connecter</h1>
+        {% if error %}
+            <div class="alert alert-danger">E-mail ou mot de passe invalide.</div>
+        {% endif %}
+        <label for="inputEmail">Email</label><br>
+        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus><br>
+        <label for="inputPassword">Mot de passe</label><br>
+        <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required><br>
 
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
+        <input type="hidden" name="_csrf_token"
+               value="{{ csrf_token('authenticate') }}"
+        >
 
-    {#
-        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-        See https://symfony.com/doc/current/security/remember_me.html
+        {#
+            Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+            See https://symfony.com/doc/current/security/remember_me.html
 
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" name="_remember_me"> Remember me
-            </label>
-        </div>
-    #}
+            <div class="checkbox mb-3">
+                <label>
+                    <input type="checkbox" name="_remember_me"> Remember me
+                </label>
+            </div>
+        #}
 
-    <button class="btn btn-lg btn-primary" type="submit">
-        Connexion
-    </button>
-</form>
+        <button class="btn btn-lg btn-primary" type="submit">
+            Connexion
+        </button><br>
+        Pas encore de compte ? <a href="register">S'inscrire</a>
+    </form>
+    </div>
 {% endblock %}

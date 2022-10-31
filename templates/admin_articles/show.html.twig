@@ -12,6 +12,12 @@
                 <td>{{ article.id }}</td>
             </tr>
             <tr>
+                <th>Image</th>
+                <td>
+                    <img src= {{ asset('uploads/' ~ article.imageFile) }} alt="" height="100px" width="auto">
+                </td>
+            </tr>
+            <tr>
                 <th>Title</th>
                 <td>{{ article.title }}</td>
             </tr>

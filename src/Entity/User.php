@@ -39,10 +39,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Articles::class, orphanRemoval: true)]
     private Collection $articles;
 
-    public function __construct($security_context)
+    public function __construct()
     {
-        // if ($security_context->getToken() != null) {
-        //    $this->id = $security_context->getToken()->getId();}
         $this->articles = new ArrayCollection();
     }
 

@@ -26,6 +26,9 @@ class Articles
     #[ORM\JoinColumn(nullable: false)]
     private $user = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $imageFile = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -70,6 +73,18 @@ class Articles
     public function __toString()
     {
         return $this->getTitle();
+    }
+
+    public function getImageFile(): ?string
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageFile(?string $imageFile): self
+    {
+        $this->imageFile = $imageFile;
+
+        return $this;
     }
 
 

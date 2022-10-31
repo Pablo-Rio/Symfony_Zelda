@@ -6,6 +6,7 @@ use App\Entity\Articles;
 use App\Entity\User;
 use App\Form\ArticlesType;
 use App\Repository\ArticlesRepository;
+use App\Service\FileUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,16 +24,23 @@ class AdminArticlesController extends AbstractController
     }
 
     #[Route('/new', name: 'app_admin_articles_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, ArticlesRepository $articlesRepository): Response
+    public function new(Request $request, FileUploader $fileUploader, ArticlesRepository $articlesRepository): Response
     {
         $article = new Articles(null, null, null);
 
         $article->setUser($this->getUser());
-        
+
         $form = $this->createForm(ArticlesType::class, $article);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $imageFile = $form->get('image')->getData();
+            if ($imageFile) {
+                $imageFileName = $fileUploader->upload($imageFile);
+                $article->setImageFile($imageFileName);
+            }
+
             $articlesRepository->save($article, true);
             $this->addFlash('success', 'Article créé avec succès !');
             return $this->redirectToRoute('app_admin_articles_index', [], Response::HTTP_SEE_OTHER);
@@ -54,12 +62,19 @@ class AdminArticlesController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_admin_articles_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Articles $article, ArticlesRepository $articlesRepository): Response
+    public function edit(Request $request, FileUploader $fileUploader, Articles $article, ArticlesRepository $articlesRepository): Response
     {
         $form = $this->createForm(ArticlesType::class, $article);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $imageFile = $form->get('image')->getData();
+            if ($imageFile) {
+                $imageFileName = $fileUploader->upload($imageFile);
+                $article->setImageFile($imageFileName);
+            }
+
             $articlesRepository->save($article, true);
 
             return $this->redirectToRoute('app_admin_articles_index', [], Response::HTTP_SEE_OTHER);

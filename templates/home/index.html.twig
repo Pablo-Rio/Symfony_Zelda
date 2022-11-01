@@ -17,6 +17,7 @@
 
         {% if app.user %}
                 <a href="{{ path('app_logout') }}"><button type="button" class="btn">Déconnexion</button></a>
+                <a href="{{ path('app_profile_show') }}"><button type="button" class="btn">Profil</button></a>
         {% else %}
                 <a href="login"><button type="button" class="btn">Se connecter</button></a>
         {% endif %}

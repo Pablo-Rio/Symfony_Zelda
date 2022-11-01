@@ -1,0 +1,8 @@
+{{ form_start(form) }}
+    {# {{ form_widget(form) }}#}
+    <label for="inputUsername">Nom d'utilisateur</label><br>
+    {{ form_row(form.username, { label: ' ', }) }}
+    <label for="inputPassword">Nouveau mot de passe</label><br>
+    {{ form_row(form.plainPassword, { label: ' ', }) }}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}The Legend Of Zelda: The Great Forum{% endblock %}
+
+{% block body %}
+    <h1>Mon profil</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>E-mail</th>
+                <td>{{ user.email }}</td>
+            </tr>
+            <tr>
+                <th>Nom d'utilisateur</th>
+                <td>{{ user.username }}</td>
+            </tr>
+            <tr>
+                <th>Mot de passe</th>
+                <td>{{ '**********' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_profile_edit')}}">Modifier</a>
+
+{% endblock %}

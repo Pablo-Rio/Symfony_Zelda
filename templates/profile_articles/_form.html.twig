@@ -1,0 +1,17 @@
+{#
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn">{{ button_label|default('Sauvegarder') }}</button>
+{{ form_end(form) }}
+#}
+
+{{ form_start(form) }}
+    <label for="inputTitle">Titre</label><br>
+    {{ form_row(form.title, {label: ' '}) }}
+    <label for="inputTitle">Description</label><br>
+    {{ form_row(form.description, {label: ' '}) }}
+    <label for="inputTitle">Image (fichier JPG ou PNG)</label><br>
+    {{ form_row(form.image, {label: ' '}) }}
+
+<button class="btn">{{ button_label|default('Sauvegarder') }}</button>
+{{ form_end(form) }}

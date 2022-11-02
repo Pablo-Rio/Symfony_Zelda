@@ -17,17 +17,17 @@ class ArticlesType extends AbstractType
             ->add('title')
             ->add('description')
             ->add('image', FileType::class, [
-                'label' => 'Image (JPG or PNG file)',
                 'mapped' => false,
                 'required' => false,
                 'constraints' => [
                     new File([
-                        'maxSize' => '1024k',
+                        'maxSize' => '3146k',
+                        'uploadIniSizeErrorMessage' => 'La taille maximum du fichier doit être de 3Mo.',
                         'mimeTypes' => [
                             'image/jpeg',
                             'image/png',
                         ],
-                        'mimeTypesMessage' => 'Please upload a valid JPG or PNG document',
+                        'mimeTypesMessage' => 'Veuillez sélectionner un fichier JPG ou PNG.',
                     ])
                 ],
             ])

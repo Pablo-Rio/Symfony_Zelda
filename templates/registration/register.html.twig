@@ -4,40 +4,106 @@
 
 {% block body %}
     <style>
-        .container { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-        #agreeT { display: flex; }
+        body {
+            height: 100%;
+        }
+
+        a {
+            text-decoration: none;
+            color: rgb(98, 168, 229);
+        }
+
+        a:hover {
+            color: rgb(98, 168, 229);
+            text-decoration: underline;
+        }
+
+        .container {
+            margin-top: 22vh;
+            transform: translateY(-10%);
+            color: black;
+            width: 25%;
+            background-color: white;
+            border-radius: 7px;
+            padding: 35px;
+
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        form {
+            font-size: 15px;
+        }
+
+        form>label {
+            font: 16px/1.8 sans-serif;
+            font-weight: bold;
+            margin-top: 10px ;
+        }
+
+        input {
+            margin-bottom: 20px;
+            width: 97%;
+            height: 38px;
+            border-radius: 5px;
+            border: 1px solid white;
+            padding-left: 10px;
+            background-color: rgb(0,0,0,0.1);
+            font-size: 16px;
+        }
+
+        input:focus {
+            outline:  none;
+        }
+
+        button {
+            margin-bottom: 5px;
+            width: 100%;
+            height: 45px;
+            border-radius: 5px;
+            border: 1px solid white;
+            padding-left: 10px;
+            background-color: rgb(98, 168, 229);
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: rgb(104, 179, 237);
+        }
+
+        #agreeT {
+            display: flex;
+            font-size: 13px;
+            margin-top: -20px;
+        }
+
+        #agreeT>label {
+            margin: 13px 0px 0px 10px;
+        }
+
+
+
     </style>
     <div class="container">
         <h1>Créer un compte</h1>
-
-        {# {{ form_start(registrationForm) }}
-            {{ form_row(registrationForm.email, {
-                label: 'E-mail',
-            }) }}
-            {{ form_row(registrationForm.username, {
-                label: 'Nom d\'utilisateur',
-            }) }}
-            {{ form_row(registrationForm.plainPassword, {
-                label: 'Mot de passe'
-            }) }}
-            {{ form_row(registrationForm.agreeTerms, {
-                label: 'J\'ai lu et accepté les conditions d\'utilisation.'
-            }) }} #}
-
         {{ form_start(registrationForm) }}
-        <label for="inputEmail">E-mail</label><br>
+        <label for="inputEmail">E-MAIL *</label><br>
         {{ form_row(registrationForm.email, { label: ' ', }) }}
-        <label for="inputUsername">Nom d'utilisateur</label><br>
+        <label for="inputUsername">NOM D'UTILISATEUR *</label><br>
         {{ form_row(registrationForm.username, { label: ' ', }) }}
-        <label for="inputPassword">Mot de passe</label><br>
+        <label for="inputPassword">MOT DE PASSE *</label><br>
         {{ form_row(registrationForm.plainPassword, { label: ' ', }) }}
         <div id="agreeT">
             {{ form_row(registrationForm.agreeTerms, { label: ' ', }) }}
             <label for="inputAgreeTerms">J'ai lu et accepté les Conditions d'Utilisation.</label><br>
         </div>
         <button type="submit" class="btn">Continuer</button>
-        {{ form_end(registrationForm) }}
         Déjà un compte ? <a href="login">Se connecter</a>
+        {{ form_end(registrationForm) }}
     </div>
 {% endblock %}

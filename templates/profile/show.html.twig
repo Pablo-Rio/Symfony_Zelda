@@ -3,26 +3,44 @@
 {% block title %}The Legend Of Zelda: The Great Forum{% endblock %}
 
 {% block body %}
-    <h1>Mon profil</h1>
+    <header>
+        <a href={{ path('home') }}><img src={{ asset("media/Logo.png") }}></a>
+        <nav>
+            <ul>
+                <li><a href={{ path('app_profile_articles_new') }}>Ecrire un article</a></li>
+                <li><a href={{ path('app_profile_articles_index') }}>Contact</a></li>
+                {% if app.user %}
+                    <li><a href={{ path('app_profile_show') }}>Profil</a></li>
+                {% else %}
+                    <li><a href={{ path('app_login') }}>Se connecter</a></li>
+                    <li><a href={{ path('app_register') }}>Créer un compte</a></li>
+                {% endif %}
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>E-mail</th>
-                <td>{{ user.email }}</td>
-            </tr>
-            <tr>
-                <th>Nom d'utilisateur</th>
-                <td>{{ user.username }}</td>
-            </tr>
-            <tr>
-                <th>Mot de passe</th>
-                <td>{{ '**********' }}</td>
-            </tr>
-        </tbody>
-    </table>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <h1>Mon profil</h1>
 
-    <a href="{{ path('app_profile_edit')}}">Modifier</a>
-    <a href="{{ path('app_logout') }}"><button type="button" class="btn">Déconnexion</button></a>
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>E-mail</th>
+                    <td>{{ user.email }}</td>
+                </tr>
+                <tr>
+                    <th>Nom d'utilisateur</th>
+                    <td>{{ user.username }}</td>
+                </tr>
+                <tr>
+                    <th>Mot de passe</th>
+                    <td>{{ '**********' }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <a href="{{ path('app_profile_edit')}}">Modifier</a>
+        <a href="{{ path('app_logout') }}"><button type="button" class="btn">Déconnexion</button></a>
+    </div>
 
 {% endblock %}

@@ -3,23 +3,42 @@
 {% block title %}The Legend Of Zelda: The Great Forum{% endblock %}
 
 {% block body %}
-    <style>
-        .container { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-        h1 { margin-bottom: -30px; }
-    </style>
+    <header>
+        <a href={{ path('home') }}><img alt="logo" src={{ asset("media/Logo.png") }}></a>
+        <nav>
+            <ul>
+                <li><a href={{ path('app_profile_articles_new') }}>Ecrire un article</a></li>
+                <li><a href={{ path('app_profile_articles_index') }}>Contact</a></li>
+                {% if app.user %}
+                    <li><a href={{ path('app_profile_show') }}>Profil</a></li>
+                {% else %}
+                    <li><a href={{ path('app_login') }}>Se connecter</a></li>
+                {% endif %}
 
+            </ul>
+        </nav>
+    </header>
     <div class="container">
-        <h1>The Legend Of Zelda:</h1>
-        <h2>The Great Forum</h2>
-
-
-
-        {% if app.user %}
-                <a href="{{ path('app_logout') }}"><button type="button" class="btn">Déconnexion</button></a>
-                <a href="{{ path('app_profile_show') }}"><button type="button" class="btn">Profil</button></a>
+        <h1>Les derniers articles</h1>
+        <div class="containerArticles">
+        {% for article in articles %}
+            <a href="/profile/articles/{{ article.id }}">
+                <button class="article" >
+                    <tr>
+                        <td>
+                            <img class="imageArticle" alt='' src= {{ asset('uploads/' ~ article.imageFile) }}>
+                        </td>
+                        <td><h3 class="titreArticle">{{ article.title }}</h3></td>
+                        <td><p class="auteurArticle">{{ article.user}} </p></td>
+                    </tr>
+                </button>
+            </a>
         {% else %}
-                <a href="login"><button type="button" class="btn">Se connecter</button></a>
-        {% endif %}
+            <tr>
+                <td colspan="4">Aucun article trouvé ! C'est bien malheureux...</td>
+            </tr>
+        {% endfor %}
+        </div>
+        <h1>Les dernières vidéos</h1>
     </div>
 {% endblock %}

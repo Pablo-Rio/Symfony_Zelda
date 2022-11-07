@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}The Legend Of Zelda: The Great Forum{% endblock %}
+
+{% block body %}
+    <header>
+        <a href={{ path('home') }}><img alt="logo" src={{ asset("media/Logo.png") }}></a>
+        <nav>
+            <ul>
+                <li><a href={{ path('app_profile_articles_new') }}>Ecrire un article</a></li>
+                <li><a href={{ path('app_profile_articles_index') }}>Contact</a></li>
+                {% if app.user %}
+                    <li><a href={{ path('app_profile_show') }}>Profil</a></li>
+                {% else %}
+                    <li><a href={{ path('app_login') }}>Se connecter</a></li>
+                {% endif %}
+
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <h1>Tous les articles</h1>
+            <div class="containerArticles">
+            {% for article in articles %}
+                <a href="/article/{{ article.id }}">
+                    <div class="carteArticle">
+                        <img class="imageArticle" alt='' src= {{ asset('uploads/' ~ article.imageFile) }}>
+                        <div class="containerTexteArticle">
+                            <h3 class="titreArticle">{{ article.title }}</h3>
+                            <p class="auteurArticle">{{ article.user }}</p>
+                        </div>
+                    </div>
+                </a>
+            {% else %}
+                <p>Aucun article trouvé ! C'est pas bon signe...</p>
+            {% endfor %}
+            </div>
+    </div>
+{% endblock %}

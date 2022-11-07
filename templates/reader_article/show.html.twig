@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}The Legend Of Zelda: The Great Forum{% endblock %}
+
+{% block body %}
+    <style>
+        body {height: 100%;}
+        .container>img {
+            height: 300px;
+        }
+        body {margin-top: 120px;}
+        header {margin-top: -120px;}
+
+    </style>
+
+    <header>
+        <a href={{ path('home') }}><img alt="logo" src={{ asset("media/Logo.png") }}></a>
+        <nav>
+            <ul>
+                <li><a href={{ path('app_profile_articles_new') }}>Ecrire un article</a></li>
+                <li><a href={{ path('app_profile_articles_index') }}>Contact</a></li>
+                {% if app.user %}
+                    <li><a href={{ path('app_profile_show') }}>Profil</a></li>
+                {% else %}
+                    <li><a href={{ path('app_login') }}>Se connecter</a></li>
+                {% endif %}
+
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <img alt='' src= {{ asset('uploads/' ~ article.imageFile) }}>
+        <h1>{{ article.title }}</h1>
+        <p>{{ article.description }}</p>
+    </div>
+{% endblock %}

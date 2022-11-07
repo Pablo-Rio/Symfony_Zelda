@@ -22,21 +22,17 @@
         <h1>Les derniers articles</h1>
         <div class="containerArticles">
         {% for article in articles %}
-            <a href="/profile/articles/{{ article.id }}">
-                <button class="article" >
-                    <tr>
-                        <td>
-                            <img class="imageArticle" alt='' src= {{ asset('uploads/' ~ article.imageFile) }}>
-                        </td>
-                        <td><h3 class="titreArticle">{{ article.title }}</h3></td>
-                        <td><p class="auteurArticle">{{ article.user}} </p></td>
-                    </tr>
-                </button>
+            <a href="/article/{{ article.id }}">
+                <div class="carteArticle">
+                    <img class="imageArticle" alt='' src= {{ asset('uploads/' ~ article.imageFile) }}>
+                    <div class="containerTexteArticle">
+                            <h3 class="titreArticle">{{ article.title }}</h3>
+                            <p class="auteurArticle">{{ article.user }}</p>
+                    </div>
+                </div>
             </a>
         {% else %}
-            <tr>
-                <td colspan="4">Aucun article trouvé ! C'est bien malheureux...</td>
-            </tr>
+            <p>Aucun article trouvé ! C'est bien malheureux...</p>
         {% endfor %}
         </div>
         <h1>Les dernières vidéos</h1>

@@ -7,15 +7,15 @@
         <a href={{ path('home') }}><img src={{ asset("media/Logo.png") }}></a>
         <nav>
             <ul>
-                <li><a href={{ path('app_profile_articles_new') }}>Ecrire un article</a></li>
-                <li><a href={{ path('app_profile_articles_index') }}>Contact</a></li>
+                <li><a href={{ path('app_reader_article_index') }}>Articles</a></li>
                 {% if app.user %}
+                    <li><a href={{ path('app_profile_articles_index') }}>Mes articles</a></li>
+                    <li><a href={{ path('app_profile_articles_index') }}>Contact</a></li>
                     <li><a href={{ path('app_profile_show') }}>Profil</a></li>
                 {% else %}
+                    <li><a href={{ path('app_profile_articles_index') }}>Contact</a></li>
                     <li><a href={{ path('app_login') }}>Se connecter</a></li>
-                    <li><a href={{ path('app_register') }}>Créer un compte</a></li>
                 {% endif %}
-
             </ul>
         </nav>
     </header>

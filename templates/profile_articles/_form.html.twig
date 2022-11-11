@@ -6,12 +6,42 @@
 #}
 
 {{ form_start(form) }}
+    <style>
+        #ImageUpload {
+            margin: 0 0 20px 0;
+        }
+
+        label {
+            font: 16px/1.5 sans-serif;
+            font-weight: bold;
+        }
+
+        form {
+            font-size: 15px;
+        }
+
+
+    </style>
+    <script>
+
+    tinymce.init({
+        selector: 'textarea',
+        elementpath: false,
+        menubar : false,
+        toolbar: 'fontsize bold italic underline strikethrough',
+        statusbar: false,
+    });
+
+
+    </script>
     <label for="inputTitle">Titre</label><br>
     {{ form_row(form.title, {label: ' '}) }}
-    <label for="inputTitle">Description</label><br>
-    {{ form_row(form.description, {label: ' '}) }}
-    <label for="inputTitle">Image (fichier JPG ou PNG)</label><br>
-    {{ form_row(form.image, {label: ' '}) }}
+    <div id="ImageUpload">
+        <label for="">Image (fichier JPG ou PNG)</label><br>
+        {{ form_row(form.image, {label: ' '}) }}
+    </div>
+    <label for="">Description</label><br>
+    {{ form_row(form.description, {label: ' ', value:''}) }}
 
-<button class="btn">{{ button_label|default('Sauvegarder') }}</button>
+<button class="btn">{{ button_label|default('Poster') }}</button>
 {{ form_end(form) }}

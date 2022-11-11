@@ -3,11 +3,14 @@
 namespace App\Form;
 
 use App\Entity\Articles;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class ArticlesType extends AbstractType
 {
@@ -15,10 +18,12 @@ class ArticlesType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('description')
+            ->add('description', TextareaType::class, [
+                'required' => false,
+            ])
             ->add('image', FileType::class, [
                 'mapped' => false,
-                'required' => false,
+                'required' => true,
                 'constraints' => [
                     new File([
                         'maxSize' => '3146k',
@@ -28,6 +33,10 @@ class ArticlesType extends AbstractType
                             'image/png',
                         ],
                         'mimeTypesMessage' => 'Veuillez sélectionner un fichier JPG ou PNG.',
+
+                    ]),
+                    new NotBlank([
+                        'message' => 'Veuillez sélectionner un fichier',
                     ])
                 ],
             ])

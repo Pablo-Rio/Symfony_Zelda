@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 
 #[Route('/profile/articles')]
 class ProfileArticlesController extends AbstractController
@@ -28,8 +29,22 @@ class ProfileArticlesController extends AbstractController
     {
         $article = new Articles();
         $form = $this->createForm(ArticlesType::class, $article);
+
+
+        /* $form->add('description', CKEditorType::class, array(
+            'config' => array(
+                'uiColor' => '#ffffff',
+                //...
+            ),
+        ));*/
+
         $form->handleRequest($request);
         $article->setUser($this->getUser());
+
+        if ($form->get('description')->getData() === null) {
+            $article->setDescription('Aucune description');
+        }
+
 
         if ($form->isSubmitted() && $form->isValid()) {
             $imageFile = $form->get('image')->getData();
@@ -45,6 +60,7 @@ class ProfileArticlesController extends AbstractController
         return $this->renderForm('profile_articles/new.html.twig', [
             'article' => $article,
             'form' => $form,
+
         ]);
     }
 
@@ -68,6 +84,10 @@ class ProfileArticlesController extends AbstractController
         } else {
             $form = $this->createForm(ArticlesType::class, $article);
             $form->handleRequest($request);
+
+            if ($form->get('description')->getData() === null) {
+                $article->setDescription('Aucune description');
+            }
 
             if ($form->isSubmitted() && $form->isValid()) {
 

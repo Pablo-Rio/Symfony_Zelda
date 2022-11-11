@@ -4,15 +4,57 @@
 
 {% block body %}
     <style>
-        body {height: 100%;}
+        body {height: 100%; margin-top: 120px;}
         .container>img {
             height: 300px;
+            margin: 0 auto;
+            display: block;
+            width: auto;
         }
-        body {margin-top: 120px;}
         header {margin-top: -120px;}
 
-    </style>
 
+        #test {
+            border: 4px solid #B99F65;
+            border-radius: 8px;
+            position: absolute;
+            z-index: 1;
+            height: 394px;
+            width: 793px;
+        }
+
+        .icones {
+            display: flex;
+            /*mettre à droite*/
+            justify-content: flex-end;
+        }
+
+        .ligne1 {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        h1 {
+            font-size: 50px;
+            font-weight: bold;
+        }
+
+    </style>
+    <script>
+        tinymce.init({
+        selector: 'textarea',
+        body_class: 'tinyTextarea',
+
+            content_style:
+                "body {background-color: #130204; color: white;}",
+
+
+        elementpath: false,
+        menubar : false,
+        toolbar: false,
+        statusbar: false,
+        });
+    </script>
     <header>
         <a href={{ path('home') }}><img alt="logo" src={{ asset("media/Logo.png") }}></a>
         <nav>
@@ -32,14 +74,20 @@
     </header>
     <div class="container">
         <img alt='' src= {{ asset('uploads/' ~ article.imageFile) }}>
-        <a href="{{ path('app_profile_articles_index') }}">Retour à mes articles</a>
-        <a href="{{ path('app_profile_articles_edit', {'id': article.id}) }}">Modifier</a>
-        {{ include('profile_articles/_delete_form.html.twig') }}
-        <h1>{{ article.title }}</h1>
-        <p>{{ article.description }}</p>
-    </div>
 
 
 
+            <div class="ligne1">
+                    <h1>{{ article.title }}</h1>
+                 <div class="icones">
+                    <a href="{{ path('app_profile_articles_edit', {'id': article.id}) }}"><button><svg xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" preserveAspectRatio="xMidYMid meet" viewBox="0 0 32 32"><path fill="currentColor" d="M2 26h28v2H2zM25.4 9c.8-.8.8-2 0-2.8l-3.6-3.6c-.8-.8-2-.8-2.8 0l-15 15V24h6.4l15-15zm-5-5L24 7.6l-3 3L17.4 7l3-3zM6 22v-3.6l10-10l3.6 3.6l-10 10H6z"/></svg></button></a>
+                    {{ include('profile_articles/_delete_form.html.twig') }}
+                </div>
+            </div>
+            <div id="test"></div>
+            <label>
+                <textarea>{{ article.description }}</textarea>
+                </label>
+            </div>
 
 {% endblock %}

@@ -31,12 +31,11 @@
         <h1>Liste de mes articles</h1>
         <div class="containerArticles">
             {% for article in articles %}
-                <a href="/article/{{ article.id }}">
+                <a href="/profile/articles/{{ article.id }}">
                     <div class="carteArticle">
                         <img class="imageArticle" alt='' src= {{ asset('uploads/' ~ article.imageFile) }}>
                         <div class="containerTexteArticle">
                             <h3 class="titreArticle">{{ article.title }}</h3>
-                            <p class="auteurArticle">{{ article.user }}</p>
                         </div>
                     </div>
                 </a>

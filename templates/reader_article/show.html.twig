@@ -11,7 +11,36 @@
         body {margin-top: 120px;}
         header {margin-top: -120px;}
 
+        #border {
+            border: 4px solid #B99F65;
+            border-radius: 8px;
+            position: absolute;
+            z-index: 1;
+            height: 394px;
+            width: 793px;
+        }
+
+        h1 {
+            font-size: 50px;
+            font-weight: bold;
+        }
+
     </style>
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            body_class: 'tinyTextarea',
+
+            content_style:
+                "body {background-color: #130204; color: white;}",
+
+
+            elementpath: false,
+            menubar : false,
+            toolbar: false,
+            statusbar: false,
+        });
+    </script>
 
     <header>
         <a href={{ path('home') }}><img alt="logo" src={{ asset("media/Logo.png") }}></a>
@@ -33,6 +62,10 @@
     <div class="container">
         <img alt='' src= {{ asset('uploads/' ~ article.imageFile) }}>
         <h1>{{ article.title }}</h1>
-        <p>{{ article.description }}</p>
+        <div id="border"></div>
+        <label>
+            <textarea>{{ article.description }}</textarea>
+        </label>
+    </div>
     </div>
 {% endblock %}

@@ -3,12 +3,15 @@
 {% block title %}The Legend Of Zelda: The Great Forum{% endblock %}
 
 {% block body %}
-    <h1>Modifier mon profil</h1>
+    {{ include('tool/headerBig.html.twig') }}
+    <div class="container">
+        <h1>Modifier mon profil</h1>
 
-    {{ include('profile/_form.html.twig', {'button_label': 'Continuer'}) }}
+        {{ include('profile/_form.html.twig', {'button_label': 'Continuer'}) }}
 
 
-    <a href="{{ path('app_profile_show') }}">Retour au profil</a>
+        <a href="{{ path('app_profile_show') }}">Retour au profil</a>
 
-    {{ include('profile/_delete_form.html.twig') }}
+        {{ include('profile/_delete_form.html.twig') }}
+    </div>
 {% endblock %}

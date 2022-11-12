@@ -54,23 +54,7 @@
             statusbar: false,
         });
     </script>
-    <header>
-        <a href={{ path('home') }}><img alt="logo" src={{ asset("media/Logo.png") }}></a>
-        <nav>
-            <ul>
-                <li><a href={{ path('app_reader_article_index') }}>Articles</a></li>
-                {% if app.user %}
-                    <li><a href={{ path('app_profile_articles_index') }}>Mes articles</a></li>
-                    <li><a href={{ path('app_profile_articles_index') }}>Contact</a></li>
-                    <li><a href={{ path('app_profile_show') }}>Profil</a></li>
-                {% else %}
-                    <li><a href={{ path('app_profile_articles_index') }}>Contact</a></li>
-                    <li><a href={{ path('app_login') }}>Se connecter</a></li>
-                {% endif %}
-
-            </ul>
-        </nav>
-    </header>
+    {{ include('tool/headerBig.html.twig') }}
     <div class="container">
         <img alt='' src= {{ asset('uploads/' ~ article.imageFile) }}>
 

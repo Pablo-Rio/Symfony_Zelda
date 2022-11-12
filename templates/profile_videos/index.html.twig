@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Video index{% endblock %}
+
+{% block body %}
+    <style>
+        button>img {
+            width: 30px;
+            height: 30px;
+        }
+
+        .container>a {
+            color: rgb(98, 168, 229);
+            display: block;
+        }
+
+        #oneVideo>form {
+            text-align: center;
+            padding-bottom: 30px;
+        }
+
+        #allVideos {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+    </style>
+    {{ include('tool/headerBig.html.twig') }}
+    <div class="container">
+        <h1>Mes vidéos</h1>
+        <a href="{{ path('app_profile_videos_new') }}">Ajouter une vidéo</a>
+        <div id="allVideos">
+            {% for video in videos %}
+                <div id="oneVideo">
+                    <iframe
+                            src="{{ video.url }}"
+                            height="250"
+                            width="370">
+                    </iframe>
+                    {{ include('profile_videos/_delete_form.html.twig') }}
+                </div>
+            {% else %}
+                <label>Aucune vidéo, c'est le moment d'en ajouter !</label>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

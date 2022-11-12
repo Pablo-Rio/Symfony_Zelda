@@ -3,22 +3,7 @@
 {% block title %}The Legend Of Zelda: The Great Forum{% endblock %}
 
 {% block body %}
-    <header>
-        <a href={{ path('home') }}><img alt="logo" src={{ asset("media/Logo.png") }}></a>
-        <nav>
-            <ul>
-                <li><a href={{ path('app_reader_article_index') }}>Articles</a></li>
-                {% if app.user %}
-                    <li><a href={{ path('app_profile_articles_index') }}>Mes articles</a></li>
-                    <li><a href={{ path('app_profile_articles_index') }}>Contact</a></li>
-                    <li><a href={{ path('app_profile_show') }}>Profil</a></li>
-                {% else %}
-                    <li><a href={{ path('app_profile_articles_index') }}>Contact</a></li>
-                    <li><a href={{ path('app_login') }}>Se connecter</a></li>
-                {% endif %}
-            </ul>
-        </nav>
-    </header>
+    {{ include('tool/headerBig.html.twig') }}
     <div class="container">
         <h1>Les derniers articles</h1>
         <div class="containerArticles">
@@ -37,5 +22,13 @@
         {% endfor %}
         </div>
         <h1>Les dernières vidéos</h1>
+        {% for video in videos %}
+            <iframe
+                src="{{ video.url }}"
+                height="360"
+                width="640">
+        </iframe>
+        {% endfor %}
+
     </div>
 {% endblock %}

@@ -29,15 +29,6 @@ class ProfileArticlesController extends AbstractController
     {
         $article = new Articles();
         $form = $this->createForm(ArticlesType::class, $article);
-
-
-        /* $form->add('description', CKEditorType::class, array(
-            'config' => array(
-                'uiColor' => '#ffffff',
-                //...
-            ),
-        ));*/
-
         $form->handleRequest($request);
         $article->setUser($this->getUser());
 

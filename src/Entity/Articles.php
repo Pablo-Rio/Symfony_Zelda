@@ -4,7 +4,6 @@ namespace App\Entity;
 
 use App\Repository\ArticlesRepository;
 use Doctrine\ORM\Mapping as ORM;
-use function Symfony\Component\String\u;
 
 #[ORM\Entity(repositoryClass: ArticlesRepository::class)]
 class Articles

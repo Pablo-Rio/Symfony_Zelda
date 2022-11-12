@@ -1,0 +1,15 @@
+<style>
+    #erreur {
+        color: red;
+    }
+</style>
+{{ form_start(form) }}
+    <label for="inputUrl">URL - Uniquement les vidéos Youtube et les clips Twitch sont acceptés.</label><br>
+    {{ form_row(form.url, { label: ' ', }) }}
+        {% for message in app.flashes('invalid') %}
+            <div id="erreur">
+                {{ message }}
+            </div>
+        {% endfor %}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

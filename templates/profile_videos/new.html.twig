@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Video{% endblock %}
+
+{% block body %}
+    {{ include('tool/headerBig.html.twig') }}
+    <div class="container">
+        <h1>Ajouter une nouvelle vidéo</h1>
+
+        {{ include('profile_videos/_form.html.twig') }}
+
+        <a href="{{ path('app_profile_videos_index') }}">Retour à ma liste</a>
+    </div>
+{% endblock %}

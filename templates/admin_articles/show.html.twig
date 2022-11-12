@@ -1,36 +1,90 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Articles{% endblock %}
+{% block title %}Administrateur{% endblock %}
 
 {% block body %}
-    <h1>Articles</h1>
+    <style>
+        body {height: 100%; margin-top: 120px;}
+        .container>img {
+            height: 300px;
+            margin: 0 auto;
+            display: block;
+            width: auto;
+        }
+        header {margin-top: -120px;}
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ article.id }}</td>
-            </tr>
-            <tr>
-                <th>Image</th>
-                <td>
-                    <img src= {{ asset('uploads/' ~ article.imageFile) }} alt="" height="100px" width="auto">
-                </td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ article.title }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ article.description }}</td>
-            </tr>
-        </tbody>
-    </table>
 
-    <a href="{{ path('app_admin_articles_index') }}">back to list</a>
+        #border {
+            border: 4px solid #B99F65;
+            border-radius: 8px;
+            position: absolute;
+            z-index: 1;
+            height: 394px;
+            width: 793px;
+        }
 
-    <a href="{{ path('app_admin_articles_edit', {'id': article.id}) }}">edit</a>
+        .icones {
+            display: flex;
+            justify-content: flex-end;
+        }
 
-    {{ include('admin_articles/_delete_form.html.twig') }}
+        #titleRow {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        h1 {
+            font-size: 50px;
+            font-weight: bold;
+        }
+
+    </style>
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            body_class: 'tinyTextarea',
+
+            content_style:
+                "body {background-color: #130204; color: white;}",
+
+
+            elementpath: false,
+            menubar : false,
+            toolbar: false,
+            statusbar: false,
+        });
+    </script>
+    <header>
+        <a href={{ path('home') }}><img alt="logo" src={{ asset("media/Logo.png") }}></a>
+        <nav>
+            <ul>
+                <li><a href={{ path('app_reader_article_index') }}>Articles</a></li>
+                {% if app.user %}
+                    <li><a href={{ path('app_profile_articles_index') }}>Mes articles</a></li>
+                    <li><a href={{ path('app_profile_articles_index') }}>Contact</a></li>
+                    <li><a href={{ path('app_profile_show') }}>Profil</a></li>
+                {% else %}
+                    <li><a href={{ path('app_profile_articles_index') }}>Contact</a></li>
+                    <li><a href={{ path('app_login') }}>Se connecter</a></li>
+                {% endif %}
+
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <img alt='' src= {{ asset('uploads/' ~ article.imageFile) }}>
+
+
+        <div id="titleRow">
+            <h1>{{ article.title }}</h1>
+            <div class="icones">
+               {{ include('profile_articles/_delete_form.html.twig') }}
+            </div>
+        </div>
+        <div id="border"></div>
+        <label>
+            <textarea>{{ article.description }}</textarea>
+        </label>
+    </div>
+
 {% endblock %}

@@ -19,37 +19,10 @@ class AdminArticlesController extends AbstractController
     public function index(ArticlesRepository $articlesRepository): Response
     {
         return $this->render('admin_articles/index.html.twig', [
-            'articles' => $articlesRepository->findAll(),
-        ]);
-    }
-
-    #[Route('/new', name: 'app_admin_articles_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, FileUploader $fileUploader, ArticlesRepository $articlesRepository): Response
-    {
-        $article = new Articles(null, null, null);
-
-        $article->setUser($this->getUser());
-
-        $form = $this->createForm(ArticlesType::class, $article);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            $imageFile = $form->get('image')->getData();
-            if ($imageFile) {
-                $imageFileName = $fileUploader->upload($imageFile);
-                $article->setImageFile($imageFileName);
-            }
-
-            $articlesRepository->save($article, true);
-            $this->addFlash('success', 'Article créé avec succès !');
-            return $this->redirectToRoute('app_admin_articles_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-
-        return $this->renderForm('admin_articles/new.html.twig', [
-            'article' => $article,
-            'form' => $form,
+            'articles' => $articlesRepository->createQueryBuilder('a')
+                ->orderBy('a.id', 'DESC')
+                ->getQuery()
+                ->getResult()
         ]);
     }
 
@@ -58,31 +31,6 @@ class AdminArticlesController extends AbstractController
     {
         return $this->render('admin_articles/show.html.twig', [
             'article' => $article,
-        ]);
-    }
-
-    #[Route('/{id}/edit', name: 'app_admin_articles_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, FileUploader $fileUploader, Articles $article, ArticlesRepository $articlesRepository): Response
-    {
-        $form = $this->createForm(ArticlesType::class, $article);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            $imageFile = $form->get('image')->getData();
-            if ($imageFile) {
-                $imageFileName = $fileUploader->upload($imageFile);
-                $article->setImageFile($imageFileName);
-            }
-
-            $articlesRepository->save($article, true);
-
-            return $this->redirectToRoute('app_admin_articles_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->renderForm('admin_articles/edit.html.twig', [
-            'article' => $article,
-            'form' => $form,
         ]);
     }
 

@@ -27,6 +27,13 @@ class ReaderArticleController extends AbstractController
     #[Route('/{id}', name: 'app_reader_article_show', methods: ['GET'])]
     public function show(Articles $article): Response
     {
+        if ($article->getUser() === $this->getUser()) {
+            return $this->render('profile_articles/show.html.twig', [
+                'article' => $article,
+            ]);
+        }
+
+
         return $this->render('reader_article/show.html.twig', [
             'article' => $article,
         ]);

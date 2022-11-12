@@ -20,6 +20,17 @@
             width: 793px;
         }
 
+        .icones {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        #titleRow {
+            display: flex;
+            justify-content: space-between;
+        }
+
+
         h1 {
             font-size: 50px;
             font-weight: bold;
@@ -61,11 +72,15 @@
     </header>
     <div class="container">
         <img alt='' src= {{ asset('uploads/' ~ article.imageFile) }}>
-        <h1>{{ article.title }}</h1>
+        <div id="titleRow">
+            <h1>{{ article.title }}</h1>
+            {% if is_granted('ROLE_ADMIN') %}
+                <div class="icones">{{ include('profile_articles/_delete_form.html.twig') }}</div>
+            {% endif %}
+        </div>
         <div id="border"></div>
         <label>
             <textarea>{{ article.description }}</textarea>
         </label>
-    </div>
     </div>
 {% endblock %}

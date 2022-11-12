@@ -73,6 +73,15 @@
         li {
             color: red;
         }
+
+         #line1 {
+             display: flex;
+             margin-bottom: 20px;
+         }
+
+         #line1>h1 {
+             margin-left: 215px;
+         }
     </style>
     <header>
         <a href={{ path('home') }}><img src={{ asset("media/Logo.png") }}></a>
@@ -91,8 +100,10 @@
         </nav>
     </header>
     <div class="container">
-        <h1>Écrire un nouvel article</h1>
-
+        <div id="line1">
+            <a href="./">{{ include('tool/arrow.html.twig') }}</a>
+            <h1>Écrire un nouvel article</h1>
+        </div>
         {{ include('profile_articles/_form.html.twig') }}
 
     </div>

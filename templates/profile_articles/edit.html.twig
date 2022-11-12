@@ -3,11 +3,108 @@
 {% block title %}Edit Articles{% endblock %}
 
 {% block body %}
-    <h1>Edit Articles</h1>
+    <style>
+        body {
+            height: 100%;
+        }
 
-    {{ include('profile_articles/_form.html.twig', {'button_label': 'Update'}) }}
+        a {
+            text-decoration: none;
+            color: rgb(98, 168, 229);
+        }
 
-    <a href="{{ path('app_profile_articles_index') }}">back to list</a>
+        a:hover {
+            color: rgb(98, 168, 229);
+            text-decoration: underline;
+        }
 
-    {{ include('profile_articles/_delete_form.html.twig') }}
+        .container {
+            margin: 1em auto;
+            color: black;
+            width: 60%;
+            background-color: white;
+            border-radius: 7px;
+            padding: 35px;
+
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+
+        #articles_title {
+            margin-bottom: 20px;
+            width: 97%;
+            height: 38px;
+            border-radius: 5px;
+            border: 1.8px solid rgb(0,0,0,0.08);
+            padding-left: 10px;
+            background-color: white;
+            font-size: 16px;
+        }
+
+        input:focus {
+            outline:  none;
+        }
+
+        button {
+            margin: 5px 25% 0 25%;
+            width: 50%;
+            height: 45px;
+            border-radius: 5px;
+            border: 1px solid white;
+            padding-left: 10px;
+            background-color: rgb(98, 168, 229);
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: rgb(104, 179, 237);
+        }
+
+        textarea {
+            position: static;
+        }
+
+        li {
+            color: red;
+        }
+
+        #line1 {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        #line1>h1 {
+            margin-left: 215px;
+        }
+    </style>
+    <header>
+        <a href={{ path('home') }}><img src={{ asset("media/Logo.png") }}></a>
+        <nav>
+            <ul>
+                <li><a href={{ path('app_reader_article_index') }}>Articles</a></li>
+                {% if app.user %}
+                    <li><a href={{ path('app_profile_articles_index') }}>Mes articles</a></li>
+                    <li><a href={{ path('app_profile_articles_index') }}>Contact</a></li>
+                    <li><a href={{ path('app_profile_show') }}>Profil</a></li>
+                {% else %}
+                    <li><a href={{ path('app_profile_articles_index') }}>Contact</a></li>
+                    <li><a href={{ path('app_login') }}>Se connecter</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <div id="line1">
+            <a href="./">{{ include('tool/arrow.html.twig') }}</a>
+            <h1>Modification de l'article</h1>
+        </div>
+        {{ include('profile_articles/_form.html.twig', {'button_label': 'Sauvegarder'}) }}
+
+    </div>
 {% endblock %}

@@ -17,7 +17,7 @@ class ProfileVideosController extends AbstractController
     public function index(VideoRepository $videoRepository): Response
     {
         return $this->render('profile_videos/index.html.twig', [
-            'videos' => $videoRepository->findAll(),
+            'videos' => $videoRepository->findBy(['user'=>$this->getUser()]),
         ]);
     }
 
@@ -34,12 +34,16 @@ class ProfileVideosController extends AbstractController
             $url = $form->get('url')->getData();
             $website = substr($url, 8, strpos($url, '/', 8)-8);
 
-            if ($website == 'www.twitch.tv' && strpos($url, 'clip') !== false) {
+            if (($website == 'clips.twitch.tv' or $website == 'www.twitch.tv') && strpos($url, 'clip') !== false) {
                 $url = substr($url, strrpos($url, '/') + 1);
                 $url = 'https://clips.twitch.tv/embed?clip='.$url.'&parent=streamernews.example.com&parent=embed.example.com';
 
             } elseif ($website == 'www.youtube.com' && strpos($url, 'watch') !== false) {
+                $tmp = $url;
                 $url = substr($url, strpos($url, '=') + 1, strpos($url, '&')- strpos($url, '=') - 1);
+                if ($url == '') {
+                    $url = substr($tmp, strpos($tmp, '=') + 1);
+                }
                 $url = 'https://www.youtube.com/embed/'.$url;
 
             } elseif ($website == 'youtu.be') {

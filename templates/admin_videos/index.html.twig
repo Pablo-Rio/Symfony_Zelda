@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administrateur{% endblock %}
+
+{% block body %}
+    <style>
+        td {
+            border-bottom: white 1px solid;
+            vertical-align: center;
+        }
+    </style>
+    {{ include('tool/headerBig.html.twig') }}
+    <h1>Vidéos</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Utilisateur</th>
+                <th>Url</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for video in videos %}
+            <tr>
+                <td>{{ video.user }}</td>
+                <td>
+                    <iframe
+                        src="{{ video.url }}"
+                        height="250"
+                        width="370">
+                    </iframe>
+                </td>
+                <td>
+                    {{ include('admin_videos/_delete_form.html.twig') }}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">Aucune vidéo trouvée</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

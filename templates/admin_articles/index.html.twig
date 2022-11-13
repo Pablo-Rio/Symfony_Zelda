@@ -3,32 +3,38 @@
 {% block title %}Administrateur{% endblock %}
 
 {% block body %}
+    <style>
+        a>button {
+            background-image: url("public/media/Sheika.png");
+            height: 30px;
+            width: 30px;
+        }
+    </style>
     {{ include('tool/headerBig.html.twig') }}
-    <h1>Articles index</h1>
+    <h1>Articles</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Auteur</th>
                 <th>Image</th>
-                <th>Title</th>
+                <th>Titre</th>
                 <th>Description</th>
-                <th>actions</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for article in articles %}
             <tr>
-                <td>{{ article.id }}</td>
                 <td>{{ article.user}} </td>
                 <td>
                     <img src= {{ asset('uploads/' ~ article.imageFile) }} alt="" height="100px" width="auto">
                 </td>
                 <td>{{ article.title }}</td>
                 <td>{{ article.description }}</td>
-                <td>
-                    <a href="{{ path('app_admin_articles_show', {'id': article.id}) }}">show</a>
+                <td><li>
+                        <a href="{{ path('app_admin_articles_show', {'id': article.id}) }}"><button><img alt="voir" src="public/media/Sheika.png"></button></input>
+                        </li>
                     {{ include('admin_articles/_delete_form.html.twig') }}
                 </td>
             </tr>

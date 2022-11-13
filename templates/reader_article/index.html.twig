@@ -12,20 +12,21 @@
     {{ include('tool/headerBig.html.twig') }}
     <div class="container">
         <h1>Tous les articles de la communauté</h1>
-            <div class="containerArticles">
-            {% for article in articles %}
-                <a href="/article/{{ article.id }}">
-                    <div class="carteArticle">
-                        <img class="imageArticle" alt='' src= {{ asset('uploads/' ~ article.imageFile) }}>
-                        <div class="containerTexteArticle">
-                            <h3 class="titreArticle">{{ article.title }}</h3>
-                            <p class="auteurArticle">{{ article.user }}</p>
-                        </div>
+        <div class="containerArticles">
+        {% for article in articles %}
+            <a href="/article/{{ article.id }}">
+                <div class="carteArticle">
+                    <img class="imageArticle" alt='' src= {{ asset('uploads/' ~ article.imageFile) }}>
+                    <div class="containerTexteArticle">
+                        <h3 class="titreArticle">{{ article.title }}</h3>
+                        <p class="auteurArticle">{{ article.user }}</p>
                     </div>
-                </a>
-            {% else %}
-                <p>Aucun article trouvé ! C'est pas bon signe...</p>
-            {% endfor %}
-            </div>
+                </div>
+            </a>
+        {% else %}
+            <p>Aucun article trouvé ! C'est pas bon signe...</p>
+        {% endfor %}
+        </div>
     </div>
+    {{ include('tool/footer.html.twig') }}
 {% endblock %}

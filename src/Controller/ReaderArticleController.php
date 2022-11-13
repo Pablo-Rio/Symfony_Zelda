@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Articles;
-use App\Form\Articles1Type;
 use App\Repository\ArticlesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,7 +30,6 @@ class ReaderArticleController extends AbstractController
                 'article' => $article,
             ]);
         }
-
 
         return $this->render('reader_article/show.html.twig', [
             'article' => $article,

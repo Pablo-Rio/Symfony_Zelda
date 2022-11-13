@@ -3,6 +3,19 @@
 {% block title %}The Legend Of Zelda: The Great Forum{% endblock %}
 
 {% block body %}
+    <style>
+        th {
+            text-align: left;
+        }
+        td {
+            text-align: left;
+            padding-left: 20px;
+        }
+        #link {
+            color: #2e9ad0;
+            font-weight: bold;
+        }
+    </style>
     {{ include('tool/headerBig.html.twig') }}
     <div class="container">
         <h1>Mon profil</h1>
@@ -24,8 +37,8 @@
             </tbody>
         </table>
 
-        <a href="{{ path('app_profile_edit')}}">Modifier</a>
+        <a id="link" href="{{ path('app_profile_edit')}}">Modifier</a>
         <a href="{{ path('app_logout') }}"><button type="button" class="btn">Déconnexion</button></a>
     </div>
-
+    {{ include('tool/footer.html.twig') }}
 {% endblock %}

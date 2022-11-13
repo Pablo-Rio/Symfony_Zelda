@@ -18,27 +18,27 @@
             <tbody>
                 <tr>
                     <td><a href="#">Qui sommes-nous ?</a></td>
-                    <td><a href="#">Mon compte</a></td>
-                    <td><a href="#">Facebook</a></td>
+                    <td><a href={{ path('app_profile_show') }}>Mon compte</a></td>
+                    <td><a href="https://fr-fr.facebook.com/NintendoFR/">Facebook</a></td>
                 </tr>
                 <tr>
                     <td><a href="#">Conditions d'utilisation</a></td>
-                    <td><a href="#">Mes articles</a></td>
-                    <td><a href="#">Instagram</a></td>
+                    <td><a href={{ path('app_profile_articles_index') }}>Mes articles</a></td>
+                    <td><a href="https://www.instagram.com/nintendofr/?hl=fr">Instagram</a></td>
                 </tr>
                 <tr>
                     <td><a href="#">Respect du RGPD</a></td>
-                    <td><a href="#">Mes vidéos</a></td>
-                    <td><a href="#">Twitter</a></td>
+                    <td><a href={{ path('app_profile_videos_index') }}>Mes vidéos</a></td>
+                    <td><a href="https://twitter.com/nintendofrance">Twitter</a></td>
                 </tr>
                 <tr>
-                    <td><a href="#">Nous contacter</a></td>
-                    <td><a href="#">Écrire un article</a></td>
+                    <td><a href="mailto:thegreatforum@botw.com?subject=Sujet : &body=Bonjour,%0A" target="_blank" title="Send email">Nous contacter</a></td>
+                    <td><a href="{{ path('app_profile_articles_new') }}">Écrire un article</a></td>
                     <td></td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td><a href="#">Poster une vidéo</a></td>
+                    <td><a href="{{ path('app_profile_videos_new') }}">Poster une vidéo</a></td>
                     <td></td>
                 </tr>
             </tbody>
@@ -48,14 +48,15 @@
 <style>
     .sheika {
         margin-top: 200px;
-        position: relative;
         height: 60px;
         width: 100%;
+        display: inline-flex;
     }
 
     .sheika svg {
-        height: 100%;
+        height: 60px;
         width: 100%;
+        display: block;
     }
 
     footer {

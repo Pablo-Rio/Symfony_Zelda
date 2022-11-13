@@ -1,3 +1,59 @@
+<style>
+    header {
+        position: sticky;
+        top: 0px;
+        z-index: 20;
+        margin: -160px 0 160px 0;
+        width: 60%;
+        background-color: #000;
+        color: #fff;
+        padding: 2px 20%;
+        display: flex;
+        border-bottom: #B99F65 2px solid;
+    }
+
+    h1 {
+        font: 26px/1.5 sans-serif;
+    }
+
+    header>a>img {
+        height: 100px;
+    }
+
+    nav {
+        text-align: right;
+        vertical-align: center;
+        width: 100%;
+        padding-top: 40px;
+    }
+
+    nav>ul>li {
+        display: inline-block;
+        height: 100%;
+        padding-left: 50px;
+    }
+
+    nav>ul>li>a {
+        font-family: Inter, sans-serif;
+        font-style: normal;
+        font-size: 22px;
+        letter-spacing: -0.00em;
+        text-decoration: none;
+        color: white;
+    }
+
+    nav>ul>li>a:hover {
+        color: #B99F65;
+        text-decoration: underline;
+    }
+
+    #admin {
+        font: 14px/1.5 sans-serif;
+        padding-top: 5px;
+        width: 100%;
+        text-align: right;
+    }
+</style>
 <header>
     <a href={{ path('home') }}><img alt="logo" src={{ asset("media/Logo.png") }}></a>
     <nav>
@@ -8,6 +64,12 @@
                 <li><a href={{ path('app_profile_articles_index') }}>Mes articles</a></li>
                 <li><a href={{ path('app_profile_videos_index') }}>Mes vidéos</a></li>
                 <li><a href={{ path('app_profile_show') }}>Profil</a></li>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <div id="admin">
+                        <li><a href={{ path('app_admin_articles_index') }}>Admin article</a></li>
+                        <li><a href={{ path('app_admin_videos_index') }}>Admin video</a></li>
+                    </div>
+                {% endif %}
             {% else %}
                 <li><a href={{ path('app_login') }}>Se connecter</a></li>
             {% endif %}

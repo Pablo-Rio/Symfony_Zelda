@@ -51,7 +51,7 @@ body {
     width: 100%;
     color: white;
     height: 3000px;
-    margin-top: 190px;
+    margin-top: 160px;
 }
 
 a {
@@ -60,8 +60,10 @@ a {
 }
 
 header {
-    position: fixed;
-    margin-top: -190px;
+    position: sticky;
+    top: 0px;
+    z-index: 20;
+    margin: -160px 0 160px 0;
     width: 60%;
     background-color: #000;
     color: #fff;
@@ -135,7 +137,7 @@ nav>ul>li>a:hover {
 .carteArticle:hover {
     background-color: #B99F65;
     color: white;
-    box-shadow: 0 8px 16px 0 rgba(255,255,255,0.3);
+    box-shadow: 0 0 20px 10px rgba(0,0,0,0.8);
 }
 
 .imageArticle {

@@ -3,6 +3,119 @@
 {% block title %}The Legend Of Zelda: The Great Forum{% endblock %}
 
 {% block body %}
+    <style>
+        #carrousel{
+            width: 800px;
+            height: 400px;
+            border: white solid 4px;
+            box-shadow: 0 0 14px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        #containerVideo {
+            width: 800px;
+            height: 400px;
+        }
+
+        .buttonCarrousel {
+            position: absolute;
+            width: 140px;
+            height: 140px;
+            cursor: pointer;
+            top: 120px;
+            background-color: rgba(0, 0, 0, 0.0);
+            border: none;
+        }
+
+        .buttonCarrousel>svg {
+            width: 80px;
+            height: 80px;
+        }
+
+
+
+        #buttonCarrouselLeft {
+            left: 0;
+            opacity: 1;
+            transform: rotate(0deg);
+            transition:all 0.3s ease;
+        }
+
+        #buttonCarrouselRight {
+            right: 0;
+            opacity: 1;
+            transform: rotate(180deg);
+            transition:all 0.3s ease;
+        }
+
+        #buttonCarrouselLeft:hover {
+            transform:scale(1.6);
+            opacity: 1;
+            transition:all 0.3s ease;
+        }
+
+        #buttonCarrouselRight:hover {
+            transform:rotate(180deg) scale(1.6);
+            opacity: 1;
+            transition:all 0.3s ease;
+        }
+
+        .video {
+            width: 800px;
+            height: 400px;
+            margin: 0 -803.8px 0 0;
+            display: inline-block;
+            background-size: cover;
+        }
+
+    </style>
+    <script>
+        document.body.onload=function () {
+            nbrVideo = 6;
+            p = 0;
+            containerVideo = document.getElementById('containerVideo');
+            buttonCarrouselLeft = document.getElementById("buttonCarrouselLeft");
+            buttonCarrouselRight = document.getElementById("buttonCarrouselRight");
+            containerVideo.style.width = (800 * (nbrVideo)) + 25 + "px";
+            for (i = 0; i < nbrVideo; i++) {
+                video = document.createElement('div');
+                video.className = "video";
+
+                containerVideo.appendChild(video);
+            }
+            showHiddenButton();
+            buttonCarrouselLeft.onclick = function () {
+                if (p>0) {
+                    p--;
+                    containerVideo.style.marginLeft = -805*p+"px";
+                    containerVideo.style.transition = "all 0.5s ease";
+                    showHiddenButton()
+                }
+            }
+            buttonCarrouselRight.onclick = function () {
+                if (p < nbrVideo - 1) {
+                    p++;
+                    containerVideo.style.marginLeft = -805 * p + "px";
+                    containerVideo.style.transition = "all 0.5s ease";
+                    showHiddenButton()
+                }
+            }
+        }
+        function showHiddenButton() {
+            if (p===nbrVideo-1) {
+                buttonCarrouselRight.style.visibility = "hidden";
+            } else {
+                buttonCarrouselRight.style.visibility = "visible";
+            }
+            if (p===0) {
+                buttonCarrouselLeft.style.visibility = "hidden";
+            } else {
+                buttonCarrouselLeft.style.visibility = "visible";
+            }
+        }
+    </script>
     {{ include('tool/headerBig.html.twig') }}
     <div class="container">
         <h1>Les derniers articles</h1>
@@ -22,13 +135,17 @@
         {% endfor %}
         </div>
         <h1>Les dernières vidéos</h1>
-        {% for video in videos %}
-            <iframe
-                src="{{ video.url }}"
-                height="360"
-                width="640">
-        </iframe>
-        {% endfor %}
-
+        <div id="carrousel">
+            <div id="containerVideo">
+                <div class="video"></div>
+                {% for video in videos %}
+                <iframe id="video"
+                        src="{{ video.url }}" width="800" height="400">
+                </iframe>
+                {% endfor %}
+            </div>
+            <button class="buttonCarrousel" id="buttonCarrouselLeft">{{ include('tool/arrow.html.twig') }}</button>
+            <button class="buttonCarrousel" id="buttonCarrouselRight">{{ include('tool/arrow.html.twig') }}</button>
+        </div>
     </div>
 {% endblock %}

@@ -3,10 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Articles;
-use App\Entity\User;
-use App\Form\ArticlesType;
 use App\Repository\ArticlesRepository;
-use App\Service\FileUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -44,3 +41,32 @@ class AdminArticlesController extends AbstractController
         return $this->redirectToRoute('app_admin_articles_index', [], Response::HTTP_SEE_OTHER);
     }
 }
+
+/*
+                    &.@.
+                    &%(.
+                    &&(.
+                    &&%.
+                    &((.
+               *#.*@/%#@. @.
+             .@  ( @ &.&,,  @.
+                   /.,**
+         @@@@@@@@@@@ # @@@@@@@@@@@*
+       .@@@@.    ..% # @.*@@@%@@,
+       @@,       ..@...@@@@ @@@   ,@@@@@@@@@@@@ (@@@@@%     (@@@@@@@@#(.     @@@@@%
+                 ..@&.@@&./@@,    .(@@@@.  .@@@  @@@@@      .&@@@&. @@@@(    %@@@@@,.
+                 ..@#@@@.@@&      .&@@@@   (.#@  @@@@@      .&@@@@   @@@@(   @@@@@@@.
+                 ..@@@@@@@ ..*    .&@@@@&@@@.    @@@@@      .&@@@@  .&@@@@..@@@*@@@@#
+               . @@@/&@@,,@@@@@*  .(@@@@ .@@..(  *@@@@    ,*.%@@@@  .#@@@@.#@@( (@@@@
+               %@& @@@%@  .#%#  //,%@@@@   . @@  @@@@@   (@ .&@@@@   @@@@(%@@&%%%@@@@@.
+             .@@ .@@@ .@    *@    .&@@@@   .@@(  @@@@@ .#@@*.&@@@@. @@@@#*@@%    @@@@@#
+           .@@@ @@@/#.@(   ,@(    @@@@@@@@@@@@@ /@@@@@@@@@@**@@@@@@@@&( &@@@%    #@@@@@
+         .#@@/@@@ .@..(@  (.   @@@&,                                                       ,
+        .@@@@@@@@@@@...@@@@@@@@@@@   @ &@@@ @@ % @ @@@@ @ @@*@ @ @   @ ( @,,@ @ @@@ @@&@%@@,
+                   #/..&                    @@ @ @@@ @@ @ @@@  @     @ % @ ,@.@@@ @ @@&@* @,
+                 ..@...@
+                 ..@ ..@
+                   *(.*,
+                    &.(.
+                     *
+*/

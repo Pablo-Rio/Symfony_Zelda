@@ -6,10 +6,8 @@
             {% if app.user %}
                 <li><a href={{ path('app_profile_articles_index') }}>Mes articles</a></li>
                 <li><a href={{ path('app_profile_videos_index') }}>Mes vidéos</a></li>
-                <li><a href={{ path('app_profile_articles_index') }}>Contact</a></li>
                 <li><a href={{ path('app_profile_show') }}>Profil</a></li>
             {% else %}
-                <li><a href={{ path('app_profile_articles_index') }}>Contact</a></li>
                 <li><a href={{ path('app_login') }}>Se connecter</a></li>
             {% endif %}
         </ul>

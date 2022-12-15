@@ -63,6 +63,7 @@
         <label>
             <textarea>{{ article.description }}</textarea>
         </label>
+        {{ include('tool/socialSharing.html.twig') }}
     </div>
     {{ include('tool/footer.html.twig') }}
 {% endblock %}
